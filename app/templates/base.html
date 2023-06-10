@@ -98,7 +98,10 @@
 			    	}
 			    }
 			  });
+		  }else{
+		  	$(".produtos-mobile").hide();
 		  }
+			  
 		});
 				
 		 $('#search').on('keyup', function() {
@@ -133,9 +136,7 @@
 			    } else {
 			    	if (tamanho <= 768){
 				      $card.show();
-			    	}else{
-				      $card.hide();
-			    }
+			    	}
 			  });
 
 			  // Show/hide "Nenhum produto encontrado" message
