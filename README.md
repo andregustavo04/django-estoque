@@ -4,7 +4,7 @@
   
   ## 💻 Projeto
   Um projeto simples de CRUD que simula um estoque de produtos. Além da opção de incluir, editar e deletar produtos, a aplicação é 100% responsiva e conta com o recurso de pesquisa de produtos. Para ver a aplicação em tempo real, clique no link abaixo.<br><br>
-  <a href = "https://gas-prices-dashboard.onrender.com/" target="_blank"><img src="https://img.shields.io/badge/DASHBOARD-Preços da Gasolina no Brasil-darkblue"></a>
+  <a href = "https://agsl-sistema-de-estoque.onrender.com/" target="_blank"><img src="https://img.shields.io/badge/DJANGO-Sistema de Estoque-lightblue"></a>
 
   
   **NOTA:** Como a aplicação está hospedade no plano gratuito do Render, pode ser que ela apresente algum mau funcionamento. 
