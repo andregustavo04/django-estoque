@@ -76,10 +76,13 @@ def editar_produto(request):
 # Deletar Produto
 @login_required(login_url='login')
 def deletar_produto(request, id):
-	produto = Produtos.objects.get(id = id)
-	if produto is not None:
+	try:
+		produto = Produtos.objects.get(id = id)
 		produto.delete()
-	return HttpResponseRedirect('/')
+		return HttpResponseRedirect('/')
+	except:
+		return HttpResponseRedirect('/')
+		
 
 
 # Login
