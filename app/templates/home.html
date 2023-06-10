@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+<!-- NAVBAR -->
+{% block navbar-content %}
+<i class="text-info fas fa-vest-patches"></i>&nbsp;&nbsp; Lista de Produtos
+{% endblock navbar-content %}
+
+{% load static %}
+
+<!-- Conteúdo -->
+
+{% block content %}
+
+<div class="container">
+	<br><br>
+	<h2>Bem-vindo(a) {{request.user}}!</h2>
+	<br><br>
+	<a href="{% url 'adicionar' %}" class="btn btn-outline-info btn-sm"><i class="fas fa-plus"></i>&nbsp;&nbsp; Adicionar Produto</a>
+
+	{% if success %}
+		<div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+		  Produto adicionado com sucesso.
+		</div>
+	{% endif %}
+
+	{% if edited %}
+		<div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+		  Produto alterado com sucesso.
+		</div>
+	{% endif %}
+
+	{% if produtos %}
+
+		<div class="input-group input-group-sm mb-3 mt-4">
+			<input type="text" class="form-control" id="search" placeholder="Pesquise pelos seus produtos...">
+			<a href="{% url 'home' %}" class="btn btn-dark" style="margin-left: 2px"><i class="fas fa-sync-alt"></i></a>
+			
+		</div>
+
+		<table id="produtos-table" class="table table-bordered table-sm mt-4" style="text-align: center; font-size: 14px;">
+			<thead class="table-info">
+				<tr class="check-th">
+					<th style="width: 25%;">Produto</th>
+					<th style="width: 15%;">Preço de Compra</th>
+					<th style="width: 15%;">Preço de Venda</th>
+					<th style="width: 8%;">Quantidade</th>
+					<th style="width: 8%;">Gênero</th>
+					<th style="width: 19%;">Registrado</th>
+					<th colspan="2" style="width: 10%;">Ações</th>
+				</tr>
+			</thead>
+			{% for produto in produtos %}
+				<tr>
+					<td>{{ produto.produto }}</td>
+					<td>{{ produto.preco_compra }}</td>
+					<td>{{ produto.preco_venda }}</td>
+					<td>{{ produto.quantidade }}</td>
+					<td>{{ produto.genero }}</td>
+					<td>{{ produto.criado_em|date:"m/d/Y" }}</td>
+					<td>
+						<a href="/produto/{{ produto.id }}" class="btn btn-primary" title="Editar Produto">
+							<i class="fas fa-pen"></i>
+						</a>
+					</td>
+					<td>
+						<a href="/deletar/{{ produto.id }}" class="btn btn-danger" title="Deletar Produto">
+							<i class="fas fa-trash"></i>
+						</a>
+					</td>
+				</tr>
+
+
+
+			{% endfor %}
+
+		</table>
+
+		<span class="text-danger d-flex flex-column justify-content-center align-items-center" id="no-data"></span>
+
+		{% for produto in produtos %}
+			<div  class="card mt-3 produtos-mobile">
+			  <div class="card-header">
+			    <h5 id="titulo-card">{{produto.produto}}</h5>
+			  </div>
+			  <div class="card-body">
+			    <p class="card-text"><strong>Preço de Compra:</strong> R$ <span class="texto-card">{{produto.preco_compra}}</span></p>
+			    <p class="card-text"><strong>Preço de Venda:</strong> R$ <span class="texto-card">{{produto.preco_venda}}</span></p>
+			    <p class="card-text"><strong>Quantidade:</strong> <span class="texto-card">{{produto.quantidade}}</span></p>
+			    <p class="card-text"><strong>Gênero:</strong>  <span class="texto-card">{{produto.genero}}</span></p>
+			    <p class="card-text"><strong>Criado Em:</strong> <span class="texto-card">{{produto.criado_em|date:'d/m/Y (H:i)'}}</span></p>
+			    
+			    <div class="d-flex flex-row justify-content-end m-2">
+				    <a href="/produto/{{ produto.id }}" class="btn btn-primary m-2" title="Editar Produto">
+						<i class="fas fa-pen"></i> Editar
+					</a>
+					<a href="/deletar/{{ produto.id }}" class="btn btn-danger m-2" title="Deletar Produto">
+						<i class="fas fa-trash"></i> Excluir
+					</a>
+			    </div>
+			  </div>
+			</div>
+		{% endfor produto in produtos %}
+
+	{% else %}
+
+		<div class="container d-flex flex-column justify-content-center">
+			
+			<div class="card card-body mt-5 d-flex flex-column align-items-center" style="border:none">
+				<strong style="text-align: center;">Não há nenhum produto cadastrado ainda.</strong>
+				<img src="{% static 'imgs/empty_space.png' %}" alt="Imagem empty space" style="height: 200px; width: 200px;">
+
+
+			</div>
+		</div>
+
+	{% endif %}
+
+	
+	
+
+</div>
+
+{% endblock content %}
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>

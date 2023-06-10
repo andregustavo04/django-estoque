@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %} Adicionar Produto {% endblock title %}
+
+<!-- NAVBAR -->
+{% block navbar-content %}
+<i class="text-info fas fa-vest-patches"></i>&nbsp;&nbsp; Adicionar Produto
+{% endblock navbar-content %}
+
+
+<!-- Conteúdo -->
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="card card-body mt-5 {% block card-color %} border-dark text-light bg-secondary {% endblock card-color %}">
+				<span class="text-center">{% block card-title %} INSIRA OS DADOS DO PRODUTO ABAIXO {% endblock card-title %}</span>
+			</div>
+
+			<!-- FORMULÁRIO -->
+			<form {% block action %} action="/adicionar" {% endblock action %} method="POST" enctype="multipart/form-data" autocomplete="off" class="card p-3 border-dark mt-3">
+				{% csrf_token %}
+
+				{% block value-id %} {% endblock value-id %}
+					
+				<!-- Nome do Produto -->
+				<div class="input-group mb-3">
+					<span class="side-label btn border-secondary bg-light"><i class="fas fa-tshirt"></i></span>
+					<input type="text" name="produto" maxlength="40" placeholder="Nome do Produto" class="flex-grow-1" required {% block value-produto %} {% endblock value-produto %}>
+				</div>
+
+				<!-- Preço de Compra -->
+				<div class="input-group mb-3">
+					<span class="side-label btn border-secondary bg-light"><i class="fas fa-dollar-sign"></i></span>
+					<input type="text" name="preco_compra" maxlength="10" placeholder="Preço de Compra" pattern="[0-9]+([,.][0-9]+)?" title="Por favor, coloque um número válido. Exemplo: 90,00" class="flex-grow-1" required {% block value-preco-compra %} {% endblock value-preco-compra %}>
+				</div>
+
+				<!-- Preço de Venda -->
+				<div class="input-group mb-3">
+					<span class="side-label btn border-secondary bg-light"><i class="fas fa-hand-holding-usd"></i></span>
+					<input type="text" name="preco_venda" maxlength="10" placeholder="Preço de Venda" pattern="[0-9]+([,.][0-9]+)?" title="Por favor, coloque um número válido. Exemplo: 90,00" class="flex-grow-1" required {% block value-preco-venda %} {% endblock value-preco-venda %}>
+				</div>
+
+				<!-- Quantidade  -->
+				<div class="input-group mb-3">
+					<span class="side-label btn border-secondary bg-light"><i class="fab fa-buffer"></i></span>
+					<input type="text" name="quantidade" maxlength="10" placeholder="Quantidade" pattern="^[0-9]+$" title="Por favor, coloque um número válido. Exemplo: 52" class="flex-grow-1" required {% block value-quantidade %} {% endblock value-quantidade %}>
+				</div>
+
+				<!-- Gênero -->
+				<div class="input-group mb-3">
+					<label><span class="side-label btn border-secondary bg-light" style="border-radius: 4px 0px 0px 4px"><i class="fas fa-child"></i></span></label>
+					<select class="form-select" name="genero" required>
+						{% block option %}
+							<option value="">Selecione uma opção de gênero</option>
+						{% endblock option %}
+						<option>M</option>
+						<option>F</option>
+						<option>U</option>
+					</select>
+				</div>
+
+
+				<!-- Anotação -->
+				<div class="form-group">
+					<textarea class="form-control" name="anotacao" rows="7" maxlength="1000" placeholder="Adicione uma descrição ao produto... (opcional)">{% block anotacao %} {% endblock anotacao %} </textarea>
+				</div>
+
+				<!-- BOTÕES -->
+				<div class="mt-4" style="width: 100%;">
+					<button type="submit" class="btn btn-secondary mb-3">
+					{% block btn-action %} <i class="fas fa-plus"></i> &nbsp;&nbsp; Adicionar Produto{% endblock btn-action %}
+					</button>
+
+					<a href="{% url 'home' %}" class="btn btn-outline-dark mb-3 ms-2" style="width: 50px;" title="Voltar">
+						<i class="fas fa-chevron-left"></i>
+					</a>
+
+					<button type="reset" class="btn btn-outline-dark mb-3 ms-2" style="width: 50px;" title="Resetar">
+						<i class="fas fa-sync-alt"></i>
+					</button>
+					
+				</div>
+				
+			</form>
+
+
+
+		</div>
+	</div>
+	
+	
+</div>

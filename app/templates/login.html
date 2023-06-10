@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Login {% endblock title %}
+
+<!-- NAVBAR -->
+{% block navbar-content %}
+<i class="text-info fas fa-vest-patches"></i>&nbsp;&nbsp; Login
+{% endblock navbar-content %}
+
+<!-- CONTEÚDO -->
+{% block content %}
+
+<div class="container" style="max-width: 700px;">
+	<h1 class="mt-5 text-center">
+		Faça Login
+	</h1>
+	<form method="post" autocomplete="off" class="card p-3 border-dark mt-3 d-flex flex-column justify-content-center">
+		{% csrf_token %}
+		<div class="mb-3 d-flex flex-column">
+			<label for="username">Nome de Usuário</label>
+			<input id="username" type="text" name="username" class="form-control">
+		</div>
+
+		<div class="mb-3 d-flex flex-column">
+			<label for="password">Senha</label>
+			<input id="password" type="password" name="password" class="form-control">
+			
+		</div>
+		<button type="submit" class="btn btn-outline-info align-self-center" style="max-width: 300px">ENTRAR</button>
+
+		<div class="mt-4 align-self-center">Ainda não tem uma conta? <a href="{% url 'register' %}" class="text-primary">Criar Conta</a></div>
+	</form>
+</div>

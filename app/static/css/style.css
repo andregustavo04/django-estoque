@@ -1,0 +1,44 @@
+
+/*============== PÁGINA ==============*/
+
+html, body{
+	height: 100%;
+	margin: 0;
+	max-width: 100%;
+	overflow: auto;
+}
+
+
+/*============== NAVBAR AND FOOTER ==============*/
+
+.wrapper{
+	height: 100%;
+	margin-bottom: 50px;
+	overflow: auto;
+}
+
+#footer, .push{
+	height: 60px;
+
+}
+
+
+/*============== OUTROS ==============*/
+
+.side-label{
+	width: 45px;
+}
+
+/*.produtos-mobile{
+	display: none;
+}*/
+
+/* Responsividade */
+@media (max-width: 768px) {
+  #produtos-table {
+    display: none;
+  }
+
+  .produtos-mobile{
+		display: block;
+	}

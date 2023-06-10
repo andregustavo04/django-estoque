@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %} Criar Conta {% endblock title %}
+
+<!-- NAVBAR -->
+{% block navbar-content %}
+<i class="text-info fas fa-vest-patches"></i>&nbsp;&nbsp; Criar Conta
+{% endblock navbar-content %}
+
+<!-- CONTEÚDO -->
+{% block content %}
+
+<div class="container mt-4" style="max-width: 700px;">
+	
+	<h1 class="text-center">Crie sua conta</h1>
+	<form method="post" autocomplete="off" class="card p-3 border-dark mt-3">
+		{% csrf_token %}
+		<!-- {% for field in form %}
+			<div class="mt-3">
+				<label>{{field.label}}</label>
+				{{field}}
+			</div>
+		{% endfor %} -->
+
+		<div class="mb-3 d-flex flex-column">
+			<label for="username">Nome de Usuário</label>
+			<input id="username" type="text" name="username" class="form-control" required>
+			
+		</div>
+
+		<div class="mb-3 d-flex flex-column">
+			<label for="email">Email</label>
+			<input id="email" type="email" name="email" class="form-control" required>
+			
+		</div>
+
+		<div class="mb-3 d-flex flex-column">
+			<label for="password">Defina Uma Senha</label>
+			<input id="password" type="password" name="password" class="form-control">
+			
+		</div>
+
+		<div class="mb-3 d-flex flex-column">
+			<label for="password_confirm">Confirme Sua Senha</label>
+			<input id="password_confirm" type="password" name="password_confirm" class="form-control">	
+		</div>
+
+		{% if error %}
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			  Senhas diferentes. Tenha certeza que digitou duas senhas iguais.
+			</div>
+		{% endif %}
+
+
+		<button type="submit" class="btn btn-outline-info align-self-center mt-5" style="max-width: 300px">CRIAR</button>
+
+		<div class="mt-4 align-self-center">Já tem uma conta? <a href="{% url 'login' %}" class="text-primary" style="text-decoration: none;">Fazer Login</a></div>
+
+	</form>
+</div>

@@ -1,0 +1,53 @@
+{% extends 'adicionar.html' %}
+
+{% block title %} Editar Produto {% endblock title %}
+
+<!-- NAVBAR -->
+{% block navbar-content %}
+<i class="text-info fas fa-vest-patches"></i>&nbsp;&nbsp; Adicionar Produto
+{% endblock navbar-content %}
+
+<!-- Cor do Card -->
+{% block card-color %} bg-secondary text-light {% endblock card-color %}"
+
+<!-- Título do Card -->	
+{% block card-title %}EDITAR PRODUTO {% endblock card-title %}
+
+<!-- Form Action -->
+{% block action %} action="/editar" {% endblock action %}
+
+<!-- Conteúdo -->
+{% block value-id %} 
+	<div class="input-group mb-3">
+		<span class="side-label btn border-secondary bg-light"><i class="fas fa-key"></i></span>
+		<input type="text" name="id" maxlength="40" class="flex-grow-1" value="{{ produto.id }}" readonly>
+	</div>
+
+{% endblock value-id %}
+
+<!-- =========================== INPUTS =========================== -->
+<!-- Produto -->
+{% block value-produto %} value="{{ produto.produto }}" {% endblock value-produto %}
+
+<!-- Preço de Compra -->
+{% block value-preco-compra %} value="{{ produto.preco_compra }}" {% endblock value-preco-compra %}
+
+<!-- Preço de Venda -->
+{% block value-preco-venda %} value="{{ produto.preco_venda }}" {% endblock value-preco-venda %} 
+
+<!-- Quantidade -->
+{% block value-quantidade %} value="{{ produto.quantidade }}" {% endblock value-quantidade %}
+
+<!-- Gênero -->
+{% block option %}
+	<option style="background-color: #d3d3d3; color: #111">{{ produto.genero }}</option>
+{% endblock option %}
+
+<!-- Anotação -->
+{% block anotacao %} 
+	{{ produto.anotacao }}
+{% endblock anotacao %} 
+
+
+<!-- Botão de Salvar -->
+{% block btn-action %} <i class="fas fa-server"></i> &nbsp;&nbsp; Salvar Alterações {% endblock btn-action %}
