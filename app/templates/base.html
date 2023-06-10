@@ -58,96 +58,93 @@
 
 	<!-- Static JavaScript -->
 	<script>
-		$(document).ready(function(){
-		 console.log("Puta de Merda")
+	$(document).ready(function(){
 		let alertElement = $('.alert');
 
 		setTimeout(function(){
 			alertElement.hide(500, function(){
-				$(this).remove()
-				})
-			}, 3000)
-		})
+				$(this).remove();
+			});
+		}, 3000);
+	});
 
-		let tamanho = $(window).width();
+	let tamanho = $(window).width();
 
+	if (tamanho >= 768){
+		$(".produtos-mobile").hide();
+	} else {
+		$(".produtos-mobile").show();
+	}
 
-		if (tamanho >= 768){
-		  	$(".produtos-mobile").hide();
-		  }else{
-		  	$(".produtos-mobile").show();
-		  }
+	$(window).resize(function() {
+		tamanho = $(window).width();
 
-		$(window).resize(function() {
-		  tamanho = $(window).width();
+		if (tamanho <= 768){
+			let value = $("#search").val();
 
-		  if (tamanho <= 768){
-		  	let value = $("#search").val();
+			$(".produtos-mobile").each(function() {
+				let $card = $(this);
+				let cardTitle = $card.find('#titulo-card').text();
+				let cardText = $card.find('.texto-card').text();
 
-		  	$(".produtos-mobile").each(function() {
-			    let $card = $(this);
-			    let cardTitle = $card.find('#titulo-card').text()
-			    let cardText = $card.find('.texto-card').text();
-			    console.log(cardTitle, cardText)
+				if (cardText.toLowerCase().indexOf(value.toLowerCase()) < 0 && cardTitle.toLowerCase().indexOf(value.toLowerCase()) < 0) {
+					$card.hide();
+				} else {
+					if (tamanho <= 768){
+						$card.show();
+					}
+				}
+			});
+		} else {
+			$(".produtos-mobile").hide();
+		}
+	});
 
-			    if (cardText.toLowerCase().indexOf(value.toLowerCase()) < 0 && cardTitle.toLowerCase().indexOf(value.toLowerCase()) < 0) {
-			      	  $card.hide();
-			    } else {
-			    	if (tamanho <= 768){
-				      $card.show();
-			    	}
-			    }
-			  });
-		  }else{
-			  $(".produtos-mobile").hide();
-		       }
-			  
+	$('#search').on('keyup', function() {
+		let value = $(this).val();
+
+		// Search in table rows
+		$("table tr").each(function(e) {
+			if (e !== 0) {
+				let $go = $(this);
+				$go.find('td').each(function() {
+					let id = $(this).text();
+
+					if (id.indexOf(value) !== 0 && id.toLowerCase().indexOf(value.toLowerCase()) < 0) {
+						$go.hide();
+					} else {
+						$go.show();
+						return false;
+					}
+				});
+			}
 		});
-				
-		 $('#search').on('keyup', function() {
-			  let value = $(this).val();
 
-			  // Search in table rows
-			  $("table tr").each(function(e) {
-			    if (e !== 0) {
-			      let $go = $(this);
-			      $go.find('td').each(function() {
-			        let id = $(this).text();
+		// Search in card elements
+		$(".produtos-mobile").each(function() {
+			let $card = $(this);
+			let cardTitle = $card.find('#titulo-card').text();
+			let cardText = $card.find('.texto-card').text();
+			console.log(cardTitle, cardText);
 
-			        if (id.indexOf(value) !== 0 && id.toLowerCase().indexOf(value.toLowerCase()) < 0) {
-			          $go.hide();
-			        } else {
-			          $go.show();
-			          return false;
-			        }
-			      });
-			    }
-			  });
+			if (cardText.toLowerCase().indexOf(value.toLowerCase()) < 0 && cardTitle.toLowerCase().indexOf(value.toLowerCase()) < 0) {
+				$card.hide();
+			} else {
+				if (tamanho <= 768){
+					$card.show();
+				}
+			}
+		});
 
-			  // Search in card elements
-			  $(".produtos-mobile").each(function() {
-			    let $card = $(this);
-			    let cardTitle = $card.find('#titulo-card').text()
-			    let cardText = $card.find('.texto-card').text();
-			    console.log(cardTitle, cardText)
+		// Show/hide "Nenhum produto encontrado" message
+		let isNone = $("#produtos-table tr:not('.check-th'):visible");
+		let isNoneMobile = $(".produtos-mobile:visible");
 
-			    if (cardText.toLowerCase().indexOf(value.toLowerCase()) < 0 && cardTitle.toLowerCase().indexOf(value.toLowerCase()) < 0) {
-			      	  $card.hide();
-			    } else {
-			    	if (tamanho <= 768){
-				      $card.show();
-			    	}
-			  });
-
-			  // Show/hide "Nenhum produto encontrado" message
-			  let isNone = $("#produtos-table tr:not('.check-th'):visible");
-			  let isNoneMobile = $(".produtos-mobile:visible");
-
-			  if (isNone.length === 0 && isNoneMobile.length === 0) {
-			    $("#no-data").text("Nenhum produto encontrado").show();
-			  } else {
-			    $("#no-data").text("").hide();
-			  }
-		 });
-	</script>
+		if (isNone.length === 0 && isNoneMobile.length === 0) {
+			$("#no-data").text("Nenhum produto encontrado").show();
+		} else {
+			$("#no-data").text("").hide();
+		}
+	});
+</script>
 </body>
